@@ -1,27 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './components/nav.component';
 import Listing from './pages/listing.page';
+import API from './util/api';
+
 class App extends React.Component{
-
-  constructor(props){
-    super(props);
-
-    this.state={
-      movies : []
-    }
-  }
 
   render(){
     return(
-      <Router>
-        <div>
+      
+        <div className="bg-gray-100">
           <Nav />
-          <Switch>
-            <Route exact path="/" component={Listing} />
-          </Switch>
+          <Listing/>
+            
+          
         </div>
-      </Router>
+      
     );
   }
 }
