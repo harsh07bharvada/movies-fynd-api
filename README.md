@@ -1,2 +1,2 @@
-# CRUD
-Basic JWT authentication and CRUD operation using Node.js
+# Movies API
+Backend API for Movies Data
