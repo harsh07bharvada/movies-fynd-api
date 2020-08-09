@@ -17,11 +17,11 @@ const MovieInfoCard = ({ movie, backColor }) => {
                     </div>
                     <div className="flex flex-wrap w-full h-auto justify-around items-center p-2">
                         {
-                            genre.map((g,index) => (
+                            genre.length>0 ?genre.map((g,index) => (
                                 <div key={index} className="text-sm text-gray-700 bg-gray-200 p-1 m-1 rounded">
                                     {g}
                                 </div>
-                            ))
+                            )) :""
                         }
                     </div>
                 </div>
