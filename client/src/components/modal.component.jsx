@@ -1,5 +1,6 @@
 import React from 'react';
-  
+import './modal.styles.css';
+
 const backStyles={
     backgroundImage: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)'
 }
