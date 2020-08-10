@@ -31,7 +31,6 @@ class App extends React.Component{
     this.setState({username:username});
   }
 
-
   processSignOut = ()=>{
     const {cookies} = this.props;
     cookies.remove('token',{ path: '/'});

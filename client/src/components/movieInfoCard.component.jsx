@@ -1,13 +1,13 @@
 import React from 'react';
+import GenreList from './genreList.component';
 import ImdbIcon from '../assets/imdb.svg';
 
 
 const MovieInfoCard = ({ movie, backColor }) => {
-
     const { name, username, popularity, genre, director, imdb_score } = movie;
     return (
         <div className="flex w-full h-auto md:w-1/4 md:h-auto py-3 px-4 text-center">
-            <div style={{ backdropFilter: `blur(2px)`,backgroundImage:backColor }} className="flex flex-col w-full h-full bg-white shadow-lg rounded justify-around items-center">
+            <div style={{backgroundImage:backColor }} className="flex flex-col w-full h-full bg-white shadow-lg rounded justify-around items-center">
                 <div className="flex flex-col w-full h-full">
                     <div className="flex w-full h-auto justify-center items-center py-5 font-bold text-lg md:text-xl">
                         {name}
@@ -16,13 +16,7 @@ const MovieInfoCard = ({ movie, backColor }) => {
                         Directed by: {director}
                     </div>
                     <div className="flex flex-wrap w-full h-auto justify-around items-center p-2">
-                        {
-                            genre.length>0 ?genre.map((g,index) => (
-                                <div key={index} className="text-sm text-gray-600 bg-gray-100 p-1 m-1 rounded">
-                                    {g}
-                                </div>
-                            )) :""
-                        }
+                        <GenreList genres={genre} />
                     </div>
                 </div>
                 {username?
@@ -30,15 +24,12 @@ const MovieInfoCard = ({ movie, backColor }) => {
                         Created by: {username}
                     </div>:""
                 }
-                
                 <div className="flex w-full  rounded p-2 font-black text-lg justify-around items-center">
                     <img className="h-10" src={ImdbIcon} alt="imdb" /> {imdb_score} / 10
                 </div>
                 <div className="flex w-full bg-gray-900 rounded-b py-5 text-white font-bold justify-around items-center">
                     Popularity: {popularity} / 100
                 </div>
-                
-                
             </div>
         </div>
     )

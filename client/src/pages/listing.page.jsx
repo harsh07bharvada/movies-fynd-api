@@ -30,13 +30,13 @@ class Listing extends React.Component {
 
             //Scoop out genres array from the movies
             let genres = result.map(d => d["genre"]);
-            console.log(genres);
+            
             //Flatten the genres array
             genres = [].concat.apply([], genres);
             
             //Remove duplicate genres
             genres = genres.map(g => g.trim()).filter((d, index) => genres.indexOf(d) === index).map(v=>({value:v,active:true}));
-            console.log(genres);
+            
             this.setState({ movies: result, backColor: randomBackgroundIndices, filterBy: genres });
         }
         catch (err) {
@@ -46,6 +46,7 @@ class Listing extends React.Component {
 
     handleSearchChange = e => {
 
+        //Only search if the gap between each key press is more than 1 second or field is blank
         const { lastKeyPressTime } = this.state;
         if (Date.now() - lastKeyPressTime > 1000 || e.target.value === '')  {
             this.setState({ searchField: e.target.value, lastKeyPressTime: Date.now() });
@@ -56,7 +57,7 @@ class Listing extends React.Component {
     }
 
     sorting(first, second,sortBy) {
-
+        //Sort in ascending unless where 'order' is set to false there descending
         let comparison = 0;
         if (first > second) {
             comparison = 1;
@@ -114,32 +115,27 @@ class Listing extends React.Component {
                     Movies
                 </div>
                 <div className="flex w-full h-auto py-10 px-4 justify-center items-center ">
-                    
                     <SearchBox placeholder="Search for your favourite movies / directors..." handleSearchChange={this.handleSearchChange} />
-
                     <Dropdown name="sortList" values={sortList.map(s => s['option'])} dropdownOnClick={this.dropdownOnClick} />
-
                 </div>
                 <div className="flex flex-wrap w-4/5 h-auto py-5 justify-center items-center">
-                    {
-                        filterBy.map((genre,index)=>(
-                            <Pill key={index} data={genre} onPillClick={this.onPillClick}   />
-                        ))
-                    }
+                {
+                    filterBy.map((genre,index)=>(
+                        <Pill key={index} data={genre} onPillClick={this.onPillClick}   />
+                    ))
+                }
                 </div>
                 <div className="flex flex-wrap w-full h-auto p-4  justify-around items-center">
-                    {
-                        filteredMovies.map((m, index) => (
-                            <MovieInfoCard key={index} movie={m} backColor={backColor[index]} />
-                        ))
-                    }
+                {
+                    filteredMovies.map((m, index) => (
+                        <MovieInfoCard key={index} movie={m} backColor={backColor[index]} />
+                    ))
+                }
                 </div>
             </div>
 
         )
     }
 }
-
-
 
 export default Listing;

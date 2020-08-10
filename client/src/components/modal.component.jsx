@@ -1,21 +1,24 @@
 import React from 'react';
   
+const backStyles={
+    backgroundImage: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)'
+}
+
 class Modal extends React.Component {
     
     componentDidUpdate(prevProps) {
         const {open, id} = this.props;
+
+        //Open if already closed and new prop is for opening
         if (!prevProps.open && open)
             document.getElementById(id).showModal();  
-        
+        //Close if already open and new peop is for closing
         if (prevProps.open && !open)
             document.getElementById(id).close();
         
     }
 
     render() {
-        const backStyles={
-             backgroundImage: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)'
-        }
         const {title, id, children, handleModalHide} = this.props;
         return (
             <dialog style={backStyles} id={id} className=" fixed h-auto w-11/12 md:w-1/2 p-5  bg-white rounded-md ">
