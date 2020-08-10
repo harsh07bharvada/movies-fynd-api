@@ -1,9 +1,9 @@
 import React from 'react';
 import { withCookies } from 'react-cookie';
-import SignIn from './components/SignIn.component';
-import Modal from './components/Modal.component';
-import Nav from './components/Nav.component';
-import Listing from './pages/Listing.page';
+import SignIn from './components/SignIn.component.jsx';
+import Modal from './components/Modal.component.jsx';
+import Nav from './components/Nav.component.jsx'
+import Listing from './pages/Listing.page.jsx'
 
 
 class App extends React.Component{
@@ -30,7 +30,7 @@ class App extends React.Component{
     cookies.set('username',username,{ path: '/'});
     this.setState({username:username});
   }
-  
+
 
   processSignOut = ()=>{
     const {cookies} = this.props;
