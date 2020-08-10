@@ -1,6 +1,6 @@
 import React from 'react';
 import API from '../util/api';
-import FormInput from './FormInput.component';
+import FormInput from './formInput.component';
 
 class SignIn extends React.Component{
     

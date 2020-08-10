@@ -1,10 +1,10 @@
 import React from 'react';
 import API from '../util/api';
 import bgColors from '../util/colorValues';
-import Pill from '../components/Pill.component';
-import Dropdown from '../components/Dropdown.component';
-import SearchBox from '../components/SearchBox.component';
-import MovieInfoCard from '../components/MovieInfoCard.component';
+import Pill from '../components/pill.component';
+import Dropdown from '../components/dropdown.component';
+import SearchBox from '../components/searchBox.component';
+import MovieInfoCard from '../components/movieInfoCard.component';
 class Listing extends React.Component {
 
     constructor(props) {

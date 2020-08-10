@@ -1,9 +1,9 @@
 import React from 'react';
 import { withCookies } from 'react-cookie';
-import SignIn from './components/SignIn.component.jsx';
-import Modal from './components/Modal.component.jsx';
-import Nav from './components/Nav.component.jsx'
-import Listing from './pages/Listing.page.jsx'
+import SignIn from './components/signIn.component';
+import Modal from './components/modal.component';
+import Nav from './components/nav.component'
+import Listing from './pages/listing.page'
 
 
 class App extends React.Component{
