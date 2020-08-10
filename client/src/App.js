@@ -30,6 +30,7 @@ class App extends React.Component{
     cookies.set('username',username,{ path: '/'});
     this.setState({username:username});
   }
+  
 
   processSignOut = ()=>{
     const {cookies} = this.props;
