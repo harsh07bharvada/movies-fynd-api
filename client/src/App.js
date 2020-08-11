@@ -1,6 +1,7 @@
 import React from 'react';
 import { withCookies } from 'react-cookie';
 import SignIn from './components/signIn.component';
+import SignUp from './components/signUp.component';
 import Modal from './components/modal.component';
 import Nav from './components/nav.component'
 import Listing from './pages/listing.page'
@@ -11,17 +12,26 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      showDialog:false,
+      showSignInDialog:false,
+      showSignUpDialog:false,
       username:''
     }
   }
 
-  handleModalOpen = () => {
-    this.setState({ showDialog: true });
+  handleSignInModalOpen = () => {
+    this.setState({ showSignInDialog: true });
   }
 
-  handleModalHide = () => {
-    this.setState({ showDialog: false });
+  handleSignInModalHide = () => {
+    this.setState({ showSignInDialog: false });
+  }
+
+  handleSignUpModalOpen = () => {
+    this.setState({ showSignUpDialog: true });
+  }
+
+  handleSignUpModalHide = () => {
+    this.setState({ showSignUpDialog: false });
   }
 
   submitCallback = (result, username)=>{
@@ -40,13 +50,16 @@ class App extends React.Component{
 
   render(){
       
-    const {showDialog, username} = this.state;
+    const {showSignInDialog, showSignUpDialog, username} = this.state;
     return(
         <div className="bg-gray-300">
-          <Nav username={username } processSignOut={this.processSignOut} openSignInClicked={this.handleModalOpen} />
+          <Nav username={username } processSignOut={this.processSignOut} openSignInClicked={this.handleSignInModalOpen} openSignUpClicked={this.handleSignUpModalOpen} />
           <Listing/>
-          <Modal id="signIn" title="Sign In" handleModalHide={this.handleModalHide} open={showDialog}>
-            <SignIn handleModalHide={this.handleModalHide} submitCallback={this.submitCallback} />
+          <Modal id="signIn" title="Sign In" handleModalHide={this.handleSignInModalHide} open={showSignInDialog}>
+            <SignIn handleModalHide={this.handleSignInModalHide} submitCallback={this.submitCallback} />
+          </Modal>
+          <Modal id="signUp" title="Sign Up" handleModalHide={this.handleSignUpModalHide} open={showSignUpDialog}>
+            <SignUp handleModalHide={this.handleSignUpModalHide} submitCallback={this.submitCallback} />
           </Modal>
         </div>
     );

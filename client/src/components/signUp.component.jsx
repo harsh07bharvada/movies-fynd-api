@@ -9,6 +9,7 @@ class SignIn extends React.Component{
         this.state={
             username:'',
             password:'',
+            confirmPassword:'',
             disableSubmit:true,
             errorMessage:''
         }
@@ -17,16 +18,17 @@ class SignIn extends React.Component{
     handleSubmit = async(event)=>{
 
         const {submitCallback, handleModalHide} = this.props;
-        const {username,password} = this.state;
+        const {username,password,confirmPassword} = this.state;
         try{
             //If username & passwords aren't empty then make the API call
-            if(username !=='' && password !==''){
-                const result = await API.processLogin({username,password});
-                if(result['status'] === 200){
+            if(username !=='' && password !=='' &&  confirmPassword !=='' && password === confirmPassword){
+                const result = await API.processSignUp({username:username,password:password,isAdmin:true});
+                if(result['status'] === 201){
                     submitCallback(result, username);
                     handleModalHide();
-                }else{
-                    this.setState({ errorMessage:'Error while signing in .'});
+                }
+                else{
+                    this.setState({ errorMessage:'Error while creating user'});
                 }
             }else{
                 if(username === '' && password === ''){
@@ -44,7 +46,7 @@ class SignIn extends React.Component{
             this.setState({ errorMessage:error.message});
             console.log(`Error occurred while signing try ${error.message}`);
         }
-        this.setState({ username:'', password:''});
+        this.setState({ username:'', password:'',confirmPassword:''});
     }
 
 
@@ -53,7 +55,7 @@ class SignIn extends React.Component{
         this.setState({
              [name] : value  
         });
-        if(this.state.username !=='' && this.state.password !== ''){
+        if(this.state.username !=='' && this.state.password !== '' && this.state.confirmPassword !== ''){
             this.setState({ disableSubmit:false});
         }
         else{
@@ -63,7 +65,7 @@ class SignIn extends React.Component{
     }
 
     render(){
-        const {errorMessage, username, password, disableSubmit} = this.state;
+        const {errorMessage, username, password,confirmPassword, disableSubmit} = this.state;
         return(
             <div className="flex flex-row w-full h-full justify-center items-center p-10 md:py-10 md:px-32 ">
                 <div className=" flex flex-col w-full h-full">
@@ -74,6 +76,9 @@ class SignIn extends React.Component{
                             </div>
                             <div className="flex flex-col  w-full px-4 py-4 md:px-6 md:py-6 ">
                                 <FormInput label="Password" handleChange={this.handleChange} name="password" value={password} type="password" />   
+                            </div>
+                            <div className="flex flex-col  w-full px-4 py-4 md:px-6 md:py-6 ">
+                                <FormInput label="Confirm Password" handleChange={this.handleChange} name="confirmPassword" value={confirmPassword} type="password" />   
                             </div>
                             {
                                 errorMessage!==''?

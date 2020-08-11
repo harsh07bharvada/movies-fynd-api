@@ -9,8 +9,11 @@ export default {
 
 	//Login using username & password data
 	processLogin : function (credentials){
-		console.log(`credentials : ${JSON.stringify(credentials)}`);
 		 return axios.post('/signin',credentials);
+		
+	},
+	processSignUp : function (credentials){
+		 return axios.post('/signup',credentials);
 		
 	}
 };
